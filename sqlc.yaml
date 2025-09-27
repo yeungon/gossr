@@ -1,0 +1,20 @@
+version: "2"
+sql:
+  - engine: "postgresql"
+    schema: "internal/infra/db/migrations/*.up.sql"
+    queries: "internal/module/articles/queries"
+    gen:
+      go:
+        out: "internal/module/articles/sqlc"
+        sql_package: "pgx/v5"
+        emit_json_tags: true
+
+  - engine: "postgresql"
+    schema: "internal/infra/db/migrations/*.up.sql"
+    queries: "internal/module/categories/queries"
+    gen:
+      go:
+        out: "internal/module/categories/sqlc"
+        sql_package: "pgx/v5"
+        emit_json_tags: true
+
