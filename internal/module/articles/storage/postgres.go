@@ -31,18 +31,6 @@ func toDomain(a sqlc.Article) domain.Article {
 	}
 }
 
-func toSQLC(a domain.Article) sqlc.Article {
-	return sqlc.Article{
-		ID:      a.ID,
-		Title:   a.Title,
-		Content: a.Content,
-		CreatedAt: pgtype.Timestamptz{
-			Time:  a.CreatedAt,
-			Valid: true,
-		},
-	}
-}
-
 // --- Repository methods ---
 
 func (r *ArticlePostgres) GetByID(id int64) (*domain.Article, error) {

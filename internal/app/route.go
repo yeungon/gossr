@@ -19,7 +19,7 @@ func NewRouter(cfg *config.AppConfig, logger *log.Logger) http.Handler {
 	// init article module with its own sqlc
 	articleHandler, _ := articles.Init(logger, cfg)
 
-	r.Mount("/articles", articleHandler)
+	r.Mount("/test", articleHandler)
 
 	return r
 }

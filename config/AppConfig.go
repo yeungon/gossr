@@ -19,6 +19,7 @@ type AppConfig struct {
 	InProduction   bool
 	AUTH_USER      string
 	AUTH_PASSWORD  string
+	APP_PORT       string
 	APP_DOMAIN_URL string
 	SessionManager *scs.SessionManager
 	CSRFKey        []byte
@@ -36,18 +37,6 @@ func NewApp(cacheState bool, ProductionState bool) *AppConfig {
 	}
 
 }
-
-// type Config struct {
-// 	HTTPAddr string
-// 	DBURL    string
-// }
-
-// func Load() *Config {
-// 	return &Config{
-// 		HTTPAddr: envOr("HTTP_ADDR", ":8080"),
-// 		DBURL:    envOr("DB_URL", "postgres://user:pass@localhost:5432/mydb?sslmode=disable"),
-// 	}
-// }
 
 func envOr(key, def string) string {
 	if v := os.Getenv(key); v != "" {

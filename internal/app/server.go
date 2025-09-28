@@ -1,3 +1,4 @@
+// server.go
 package app
 
 import (
@@ -8,10 +9,10 @@ import (
 )
 
 func NewServer(cfg *config.AppConfig, logger *log.Logger) *http.Server {
-	mux := NewRouter(cfg, logger)
+	r := NewRouter(cfg, logger)
 
 	return &http.Server{
-		Addr:    cfg.APP_DOMAIN_URL,
-		Handler: mux,
+		Addr:    cfg.APP_DOMAIN_URL, // Use APP_DOMAIN_URL instead of APP_PORT
+		Handler: r,
 	}
 }
