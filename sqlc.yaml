@@ -7,8 +7,7 @@ sql:
       go:
         out: "internal/module/articles/sqlc"
         sql_package: "pgx/v5"
-        emit_json_tags: true
-
+        emit_json_tags: false
   - engine: "postgresql"
     schema: "internal/infra/db/migrations/*.up.sql"
     queries: "internal/module/categories/queries"
@@ -16,5 +15,5 @@ sql:
       go:
         out: "internal/module/categories/sqlc"
         sql_package: "pgx/v5"
-        emit_json_tags: true
+        emit_json_tags: false
 

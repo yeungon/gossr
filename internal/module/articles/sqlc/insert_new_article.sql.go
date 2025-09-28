@@ -18,9 +18,9 @@ RETURNING id, title, content, created_at
 `
 
 type InsertArticleParams struct {
-	Title     string             `json:"title"`
-	Content   string             `json:"content"`
-	CreatedAt pgtype.Timestamptz `json:"created_at"`
+	Title     string
+	Content   string
+	CreatedAt pgtype.Timestamptz
 }
 
 func (q *Queries) InsertArticle(ctx context.Context, arg InsertArticleParams) (Article, error) {

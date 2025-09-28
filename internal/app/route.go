@@ -9,6 +9,7 @@ import (
 	"github.com/yeungon/gossr/config"
 
 	"github.com/yeungon/gossr/internal/module/articles"
+	"github.com/yeungon/gossr/internal/module/categories"
 )
 
 func NewRouter(cfg *config.AppConfig, logger *log.Logger) http.Handler {
@@ -18,8 +19,10 @@ func NewRouter(cfg *config.AppConfig, logger *log.Logger) http.Handler {
 
 	// init article module with its own sqlc
 	articleHandler, _ := articles.Init(logger, cfg)
+	categoryHandler, _ := categories.Init(logger, cfg)
 
-	r.Mount("/test", articleHandler)
+	r.Mount("/article", articleHandler)
+	r.Mount("/category", categoryHandler)
 
 	return r
 }

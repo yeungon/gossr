@@ -24,8 +24,9 @@ func main() {
 	appConfig := config.NewApp(true, true)
 	appConfig.Queries = db.NewQueries(pool)
 	appConfig.Conn = pool
-	appConfig.APP_PORT = env.APP_PORT
-	appConfig.APP_DOMAIN_URL = env.APP_DOMAIN_URL // used for logging / external URLs
+
+	// Ensure APP_DOMAIN_URL includes both hostname and port
+	appConfig.APP_DOMAIN_URL = "localhost:" + env.APP_PORT
 
 	logger := log.New(os.Stdout, "[api] ", log.LstdFlags)
 

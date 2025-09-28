@@ -1,24 +1,21 @@
 package config
 
 import (
-	"log"
-	"os"
-	"text/template"
-
 	"github.com/alexedwards/scs/v2"
 	"github.com/jackc/pgx/v5/pgxpool"
 	"github.com/nalgeon/redka"
 	"github.com/yeungon/gossr/internal/infra/db"
+	"log"
+	"os"
 )
 
 type AppConfig struct {
 	UseCache       bool
-	TemplateCache  map[string]*template.Template
 	ErrorLog       *log.Logger
 	InfoLog        *log.Logger
 	InProduction   bool
-	AUTH_USER      string
-	AUTH_PASSWORD  string
+	AuthUser       string
+	AuthPassword   string
 	APP_PORT       string
 	APP_DOMAIN_URL string
 	SessionManager *scs.SessionManager
