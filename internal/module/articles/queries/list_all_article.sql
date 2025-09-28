@@ -1,6 +1,5 @@
--- name: GetArticleByID :one
+
+-- name: ListArticles :many
 SELECT id, title, content, created_at
 FROM articles
-WHERE id = $1;
-
-
+ORDER BY id ASC;

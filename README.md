@@ -136,10 +136,12 @@ graph TD
 ```
 
 
-## 🤝 Contributing
-Contributions are welcome! Please fork the repo and submit a pull request.
+## References
+https://evrone.com/blog/go-clean-template
 
 ---
 
-## 📜 License
+## License
 This project is licensed under the **MIT License**.
+
+

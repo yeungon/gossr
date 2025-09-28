@@ -2,18 +2,24 @@ package transport
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"strconv"
 
+	"github.com/yeungon/gossr/config"
 	"github.com/yeungon/gossr/internal/module/articles/business"
 )
 
 type ArticleHandler struct {
 	service *business.ArticleService
+	config  *config.AppConfig
 }
 
-func NewArticleHandler(svc *business.ArticleService) *ArticleHandler {
-	return &ArticleHandler{service: svc}
+func NewArticleHandler(svc *business.ArticleService, cf *config.AppConfig) *ArticleHandler {
+	return &ArticleHandler{
+		service: svc,
+		config:  cf,
+	}
 }
 
 func (h *ArticleHandler) GetArticle(w http.ResponseWriter, r *http.Request) {
@@ -23,6 +29,10 @@ func (h *ArticleHandler) GetArticle(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "invalid id", http.StatusBadRequest)
 		return
 	}
+
+	test := h.config.APP_DOMAIN_URL
+
+	fmt.Println("Config APP_DOMAIN_URL: " + test)
 
 	article, err := h.service.GetArticle(id)
 	if err != nil {
