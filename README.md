@@ -135,9 +135,16 @@ graph TD
     E --> D
 ```
 
+## Alternative name
+
+domain -> entity (quite common option)
+transport -> controllers (simplier)
+business --> service (in which repository is simply a file given its succint content - mainly interface)
+
 ## References
 https://github.com/golang-standards/project-layout
 https://evrone.com/blog/go-clean-template
+https://github.com/bxcodec/go-clean-arch
 
 ---
 
