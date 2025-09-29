@@ -5,9 +5,8 @@ import (
 
 	"github.com/yeungon/gossr/internal/module/articles/business"
 	"github.com/yeungon/gossr/internal/module/articles/domain"
+	articles "github.com/yeungon/gossr/internal/module/articles/mapper"
 	"github.com/yeungon/gossr/internal/module/articles/sqlc"
-
-	"github.com/jackc/pgx/v5/pgtype"
 )
 
 // ArticlePostgres implements business.ArticleRepository using sqlc + Postgres.
@@ -20,17 +19,6 @@ func NewArticlePostgres(q *sqlc.Queries) business.ArticleRepository {
 	return &ArticlePostgres{q: q}
 }
 
-// --- Mapper helpers (kept private to this package) ---
-
-func toDomain(a sqlc.Article) domain.Article {
-	return domain.Article{
-		ID:        a.ID,
-		Title:     a.Title,
-		Content:   a.Content,
-		CreatedAt: a.CreatedAt.Time, // pgtype -> time.Time
-	}
-}
-
 // --- Repository methods ---
 
 func (r *ArticlePostgres) GetByID(id int64) (*domain.Article, error) {
@@ -38,7 +26,7 @@ func (r *ArticlePostgres) GetByID(id int64) (*domain.Article, error) {
 	if err != nil {
 		return nil, err
 	}
-	article := toDomain(row)
+	article := articles.FromSQLCToDomain(row)
 	return &article, nil
 }
 
@@ -48,27 +36,20 @@ func (r *ArticlePostgres) ListAll() ([]domain.Article, error) {
 	if err != nil {
 		return nil, err
 	}
-	articles := make([]domain.Article, len(rows))
+	articleList := make([]domain.Article, len(rows))
 	for i, row := range rows {
-		articles[i] = toDomain(row)
+		articleList[i] = articles.FromSQLCToDomain(row)
 	}
-	return articles, nil
+	return articleList, nil
 }
 
 func (r *ArticlePostgres) Create(a domain.Article) (*domain.Article, error) {
-	params := sqlc.InsertArticleParams{
-		Title:   a.Title,
-		Content: a.Content,
-		CreatedAt: pgtype.Timestamptz{
-			Time:  a.CreatedAt,
-			Valid: true,
-		},
-	}
+	params := articles.ToSQLCInsertParams(a)
 
 	created, err := r.q.InsertArticle(context.Background(), params)
 	if err != nil {
 		return nil, err
 	}
-	article := toDomain(created)
+	article := articles.FromSQLCToDomain(created)
 	return &article, nil
 }

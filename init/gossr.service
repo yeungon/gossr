@@ -1,0 +1,10 @@
+[Unit]
+Description=Seal Questions
+[Service]
+Type=simple
+Restart=always
+RestartSec=5s
+WorkingDirectory=/home/gossr.com/gossr
+ExecStart=/home/gossr.com/gossr/bin/gossr
+[Install]
+WantedBy=multi-user.target

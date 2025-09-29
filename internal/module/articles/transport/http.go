@@ -3,6 +3,7 @@ package transport
 import (
 	"encoding/json"
 	"fmt"
+	"html/template"
 	"net/http"
 	"strconv"
 
@@ -24,12 +25,34 @@ func NewArticleHandler(svc *business.ArticleService, cf *config.AppConfig) *Arti
 }
 
 func (h *ArticleHandler) GetArticle(w http.ResponseWriter, r *http.Request) {
-	idStr := chi.URLParam(r, "id") // Extract 'id' from the URL path
+	idStr := chi.URLParam(r, "id")
 	id, err := strconv.ParseInt(idStr, 10, 64)
 	if err != nil {
-		http.Error(w, "seems invalid id", http.StatusBadRequest)
+		http.Error(w, "Error: invalid id", http.StatusBadRequest)
 		return
 	}
+
+	// Temporary display HTML
+	tmpl := template.Must(template.New("exam").Parse(`
+	<h1>{{.Title}}</h1>
+	<p>Some random content.</p>
+	{{.Done}}
+`))
+
+	data := struct {
+		Title string
+		Done  string
+	}{
+		Title: "You are viewing article ID: " + idStr,
+		Done:  "Hello world, this is an article.",
+	}
+
+	w.Header().Set("Content-Type", "text/html")
+	tmpl.Execute(w, data)
+
+	return
+
+	//In your applicaition, fetch article from database as following
 
 	test := h.config.APP_DOMAIN_URL
 

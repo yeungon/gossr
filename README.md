@@ -1,6 +1,6 @@
-# 🚀 Go Clean Architecture with DDD and Server-Side Rendering
+# 🚀 GOSSR A Golang Template Clean Architecture with DDD and Server-Side Rendering
 
-A Go web application implementing **Clean Architecture** and **Domain-Driven Design (DDD)** principles with **server-side rendering** capabilities.
+A Go web application implementing **Clean Architecture** (modular approach) and **Domain-Driven Design (DDD) Lite** principles with **server-side rendering** capabilities.
 
 ---
 
@@ -136,6 +136,7 @@ graph TD
 ```
 
 ## References
+https://github.com/golang-standards/project-layout
 https://evrone.com/blog/go-clean-template
 
 ---

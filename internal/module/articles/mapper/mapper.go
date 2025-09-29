@@ -8,7 +8,7 @@ import (
 )
 
 // FromSQLC converts a sqlc.Article to a domain.Article
-func FromSQLC(a sqlc.Article) domain.Article {
+func FromSQLCToDomain(a sqlc.Article) domain.Article {
 	return domain.Article{
 		ID:        a.ID,
 		Title:     a.Title,
@@ -35,7 +35,19 @@ func ToSQLC(a domain.Article) sqlc.Article {
 func FromSQLCList(list []sqlc.Article) []domain.Article {
 	out := make([]domain.Article, len(list))
 	for i, a := range list {
-		out[i] = FromSQLC(a)
+		out[i] = FromSQLCToDomain(a)
 	}
 	return out
+}
+
+// ToSQLCInsertParams converts a domain.Article to sqlc.InsertArticleParams
+func ToSQLCInsertParams(a domain.Article) sqlc.InsertArticleParams {
+	return sqlc.InsertArticleParams{
+		Title:   a.Title,
+		Content: a.Content,
+		CreatedAt: pgtype.Timestamptz{
+			Time:  a.CreatedAt,
+			Valid: !a.CreatedAt.IsZero(),
+		},
+	}
 }
