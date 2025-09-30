@@ -8,7 +8,7 @@ import (
 	"github.com/yeungon/gossr/config"
 	"github.com/yeungon/gossr/internal/module/articles/business"
 	"github.com/yeungon/gossr/internal/module/articles/storage"
-	"github.com/yeungon/gossr/internal/module/articles/transport"
+	transport "github.com/yeungon/gossr/internal/module/articles/transport/http"
 )
 
 func Init(logger *log.Logger, cfg *config.AppConfig) (http.Handler, *business.ArticleService) {
@@ -18,5 +18,7 @@ func Init(logger *log.Logger, cfg *config.AppConfig) (http.Handler, *business.Ar
 
 	r := chi.NewRouter()
 	r.Get("/{id}", handler.GetArticle) //
+
+	r.Get("/view/{test}", handler.GetMostViewArticle) //
 	return r, svc
 }
