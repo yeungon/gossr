@@ -5,24 +5,24 @@ import (
 )
 
 type CategoryService struct {
-	repo CategoryRepository
+	repository CategoryRepository
 }
 
 func NewCategoryService(r CategoryRepository) *CategoryService {
-	return &CategoryService{repo: r}
+	return &CategoryService{repository: r}
 }
 
 func (s *CategoryService) GetCategory(id int64) (*domain.Category, error) {
-	return s.repo.GetByID(id)
+	return s.repository.GetByID(id)
 }
 
 func (s *CategoryService) ListCategories() ([]domain.Category, error) {
-	return s.repo.ListAll()
+	return s.repository.ListAll()
 }
 
 func (s *CategoryService) CreateCategory(c domain.Category) (*domain.Category, error) {
 	if err := c.Validate(); err != nil {
 		return nil, err
 	}
-	return s.repo.Create(c)
+	return s.repository.Create(c)
 }

@@ -9,13 +9,13 @@ import (
 var ErrInvalidName = errors.New("invalid item name")
 
 type ArticleService struct {
-	repo ArticleRepository
+	repository ArticleRepository
 }
 
 func NewArticleService(r ArticleRepository) *ArticleService {
-	return &ArticleService{repo: r}
+	return &ArticleService{repository: r}
 }
 
 func (s *ArticleService) GetArticle(id int64) (*domain.Article, error) {
-	return s.repo.GetByID(id)
+	return s.repository.GetByID(id)
 }
