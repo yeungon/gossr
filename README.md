@@ -8,42 +8,42 @@ This template, GoSSR, is built from my personal experience developing several Go
 
 Please check out the references and my notes on discussions and lessons learned while creating the GoSSR template. I’ve kept the Standard Go Project Layout in mind but also made some modifications where I found improvements necessary.
 
-In GoSSR, you’ll notice I use a “consumer interface” approach (inspired by domain-driven design principles), along with SQLC for database interactions—which is one of my personal favorites and a core reason why the template is structured this way. It is not perfect but I think it works for me.
+In GoSSR, you’ll notice I use a “consumer interface” approach (which you might somehow find it is not a convention in other languages), along with SQLC for database interactions—which is one of my personal favorites and a core reason why the template is structured this way. It is not perfect but I think it works for me.
 
 Rather than that, tabler (a free dashboard html template) is being used in this Golang template.
 
 ### Project Structure
 
 ### Features
-- Clean Architecture with Domain-Driven Design  
-- Server-side rendering  
-- PostgreSQL with **SQLC** for type-safe queries  
-- Modular design with independent business domains  
-- **Chi** router for HTTP routing  
-- Database migrations support  
+- Clean Architecture with Domain-Driven Design
+- Server-side rendering
+- PostgreSQL with **SQLC** for type-safe queries
+- Modular design with independent business domains
+- **Chi** router for HTTP routing
+- Database migrations support
 
 ### Prerequisites
-- Go **1.24+**  
-- PostgreSQL  
-- `golang-migrate`  
-- `sqlc`  
+- Go **1.24+**
+- PostgreSQL
+- `golang-migrate`
+- `sqlc`
 - `go-chi`
 
 ### Configuration
 Configuration is managed through `config.go` with environment variables. Please see .env_example for more details:
 
-- `HTTP_ADDR`: Server address (default: `:8080`)  
-- `DB_URL`: PostgreSQL connection string  
+- `HTTP_ADDR`: Server address (default: `:8080`)
+- `DB_URL`: PostgreSQL connection string
 
 ### Getting Started
 
-1. Clone the repository  
-2. Copy `.env_example` → `.env` and configure  
-3. Initialize the database:  
+1. Clone the repository
+2. Copy `.env_example` → `.env` and configure
+3. Initialize the database:
    ```bash
    make up
    ```
-4. Start the development server:  
+4. Start the development server:
    ```bash
    make dev
    ```
@@ -59,47 +59,47 @@ make down   # Rollback migrations
 
 ### Article Module
 - Located at `internal/module/articles`
-- `domain/article.go`: articles domain model  
-- `business/service.go`: Business logic  
-- `storage/postgres.go`: Data persistence  
+- `domain/article.go`: articles domain model
+- `business/service.go`: Business logic
+- `storage/postgres.go`: Data persistence
 
 ### Category Module
 - Located at `internal/module/categories`
-- `domain/category.go`: category domain model  
-- `business/service.go`: Business processing  
-- `storage/postgres.go`: Data persistence  
+- `domain/category.go`: category domain model
+- `business/service.go`: Business processing
+- `storage/postgres.go`: Data persistence
 
 
 ### HTTP Endpoints
 
 ### Articles
-- `GET /article/{id}` → Get article by ID  
+- `GET /article/{id}` → Get article by ID
 
 ### Category
-- `GET /category/{id}` → Get category by ID  
+- `GET /category/{id}` → Get category by ID
 
 ### Development
 The application uses:
-- `app.NewServer` → HTTP server setup  
-- `app.NewRouter` → Routing configuration  
-- **Chi middleware** for logging and recovery  
+- `app.NewServer` → HTTP server setup
+- `app.NewRouter` → Routing configuration
+- **Chi middleware** for logging and recovery
 
 ### Directory Structure
 
-- `cmd` → Application entrypoints  
-- `internal` → Private application code  
-- `config` → Configuration management  
-- `pkg` → Shared utilities  
-- `html` → Template files for server-side rendering  
+- `cmd` → Application entrypoints
+- `internal` → Private application code
+- `config` → Configuration management
+- `pkg` → Shared utilities
+- `html` → Template files for server-side rendering
 
 
 ### Project Layout
 The project follows **Clean Architecture** principles with clear separation of layers:
 
-- **Domain Layer** → Domain models and interfaces  
-- **Business Layer** → Use cases and business rules  
-- **Infrastructure Layer** → External interfaces  
-- **Transport Layer** → HTTP handlers  
+- **Domain Layer** → Domain models and interfaces
+- **Business Layer** → Use cases and business rules
+- **Infrastructure Layer** → External interfaces
+- **Transport Layer** → HTTP handlers
 
 Each module is **self-contained** with its own layers following **DDD principles**.
 
@@ -121,9 +121,10 @@ infras/           (shared infrastructure)
 - business --> service (in which repository is simply a file given its succint content - mainly interface)
 
 ### References
+- https://go-proverbs.github.io/ (The interface should be slim.)
 - https://github.com/golang-standards/project-layout
 - https://evrone.com/blog/go-clean-template
-- https://github.com/bernardinorafael/go-boilerplate
+- https://github.com/bernardinorafael/go-boilerplate (This template also implments DDD but everthing in one domain is separeted by files, not by folders/packages. What if the service becomes larger? I find that created separating packages/folders will help. I learn this from https://www.ardanlabs.com/blog/2017/02/package-oriented-design.html or https://archive.is/ECM0Z).
 - https://github.com/qiangxue/go-rest-api
 - https://github.com/bxcodec/go-clean-arch
 - https://philipptanlak.com/web-frontends-in-go/ or https://archive.is/ZiPT6 (I adopt a strategy to structe template layout in Laravel way from this blog. Kudo Philipp.)
@@ -131,5 +132,3 @@ infras/           (shared infrastructure)
 
 ### License
 This project is licensed under the **MIT License**.
-
-
