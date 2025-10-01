@@ -21,7 +21,7 @@ func NewRouter(cfg *config.AppConfig, logger *log.Logger) http.Handler {
 	articleHandler, _ := articles.Init(logger, cfg)
 	categoryHandler, _ := categories.Init(logger, cfg)
 
-	r.Mount("/article", articleHandler)
+	r.Mount("/", articleHandler)
 	r.Mount("/category", categoryHandler)
 
 	return r

@@ -17,7 +17,7 @@ func Init(logger *log.Logger, cfg *config.AppConfig) (http.Handler, *business.Ar
 	handler := transport.NewArticleHandler(svc, cfg)
 
 	r := chi.NewRouter()
-	r.Get("/{id}", handler.GetArticle) //
+	r.Get("/article/{id}", handler.GetArticle) //
 
 	r.Get("/view/{test}", handler.GetMostViewArticle) //
 	return r, svc
