@@ -2,9 +2,15 @@
 
 ALERT: WIP
 
-I wanted to create a ready-to-use and scalable Golang template for building web applications with HTMX and server-side rendering (SSR). This template, GoSSR, is based on my personal experiences from building several Golang projects. GoSSR implements Clean Architecture (modular approach) and Domain-Driven Design (DDD) Lite principles, with full support for server-side rendering. 
+I wanted to create a ready-to-use, scalable Golang template for building web applications with HTMX and server-side rendering (SSR). While there are a few templates out there, I still feel there isn’t an ideal candidate that really embraces SSR—especially when it comes to structuring HTML and static files using Go’s embed feature.
 
-Please take a look at the references and my notes on discussions and lessons learned while creating the GoSSR template.
+This template, GoSSR, is built from my personal experience developing several Golang projects. It implements Clean Architecture (modular approach) and Domain-Driven Design (DDD) Lite principles, with full support for server-side rendering.
+
+Please check out the references and my notes on discussions and lessons learned while creating the GoSSR template. I’ve kept the Standard Go Project Layout in mind but also made some modifications where I found improvements necessary.
+
+In GoSSR, you’ll notice I use a “consumer interface” approach (inspired by domain-driven design principles), along with SQLC for database interactions—which is one of my personal favorites and a core reason why the template is structured this way. It is not perfect but I think it works for me.
+
+Rather than that, tabler (a free dashboard html template) is being used in this Golang template.
 
 ### Project Structure
 
@@ -118,6 +124,7 @@ infras/           (shared infrastructure)
 - https://github.com/golang-standards/project-layout
 - https://evrone.com/blog/go-clean-template
 - https://github.com/bernardinorafael/go-boilerplate
+- https://github.com/qiangxue/go-rest-api
 - https://github.com/bxcodec/go-clean-arch
 - https://philipptanlak.com/web-frontends-in-go/ or https://archive.is/ZiPT6 (I adopt a strategy to structe template layout in Laravel way from this blog. Kudo Philipp.)
 - https://www.damianopetrungaro.com/posts/ddd-using-golang-tactical-design/ or https://archive.is/1xKhb (the snapshot created by myself) (I learn about domain and validation of the entity, how to initialize a new struct (domain/entity) via New pattern to trigger internal/"build-in" validation)
