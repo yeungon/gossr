@@ -1,6 +1,10 @@
 ### GOSSR - A Golang Template Applying Clean Architecture with DDD and Server-Side Rendering
 
-A Go web application implementing **Clean Architecture** (modular approach) and **Domain-Driven Design (DDD) Lite** principles with **server-side rendering** capabilities.
+ALERT: WIP
+
+I wanted to create a ready-to-use and scalable Golang template for building web applications with HTMX and server-side rendering (SSR). This template, GoSSR, is based on my personal experiences from building several Golang projects. GoSSR implements Clean Architecture (modular approach) and Domain-Driven Design (DDD) Lite principles, with full support for server-side rendering. 
+
+Please take a look at the references and my notes on discussions and lessons learned while creating the GoSSR template.
 
 ### Project Structure
 
@@ -17,9 +21,10 @@ A Go web application implementing **Clean Architecture** (modular approach) and 
 - PostgreSQL  
 - `golang-migrate`  
 - `sqlc`  
+- `go-chi`
 
 ### Configuration
-Configuration is managed through `config.go` with environment variables:
+Configuration is managed through `config.go` with environment variables. Please see .env_example for more details:
 
 - `HTTP_ADDR`: Server address (default: `:8080`)  
 - `DB_URL`: PostgreSQL connection string  
@@ -112,8 +117,10 @@ infras/           (shared infrastructure)
 ### References
 - https://github.com/golang-standards/project-layout
 - https://evrone.com/blog/go-clean-template
+- https://github.com/bernardinorafael/go-boilerplate
 - https://github.com/bxcodec/go-clean-arch
-- https://philipptanlak.com/web-frontends-in-go/ (I adopt a strategy to structe template layout in Laravel way from this blog. Kudo Philipp.)
+- https://philipptanlak.com/web-frontends-in-go/ or https://archive.is/ZiPT6 (I adopt a strategy to structe template layout in Laravel way from this blog. Kudo Philipp.)
+- https://www.damianopetrungaro.com/posts/ddd-using-golang-tactical-design/ or https://archive.is/1xKhb (the snapshot created by myself) (I learn about domain and validation of the entity, how to initialize a new struct (domain/entity) via New pattern to trigger internal/"build-in" validation)
 
 ### License
 This project is licensed under the **MIT License**.
