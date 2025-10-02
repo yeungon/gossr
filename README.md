@@ -10,10 +10,6 @@ Please check out the references and my notes on discussions and lessons learned 
 
 In GoSSR, you’ll notice I use a “consumer interface” approach (which you might somehow find it is not a convention in other languages), along with SQLC for database interactions—which is one of my personal favorites and a core reason why the template is structured this way. It is not perfect but I think it works for me.
 
-Rather than that, tabler (a free dashboard html template) is being used in this Golang template.
-
-### Project Structure
-
 ### Features
 - Clean Architecture with Domain-Driven Design
 - Server-side rendering
@@ -57,13 +53,15 @@ make down   # Rollback migrations
 
 ### Domain Modules
 
-### Article Module
+The root of the app is located at `internal/app` where everything is wired up. The module folder where you are spending most of your time is `internal/module`. Here are some examples:
+
+#### Article Module
 - Located at `internal/module/articles`
 - `domain/article.go`: articles domain model
 - `business/service.go`: Business logic
 - `storage/postgres.go`: Data persistence
 
-### Category Module
+#### Category Module
 - Located at `internal/module/categories`
 - `domain/category.go`: category domain model
 - `business/service.go`: Business processing
@@ -115,18 +113,18 @@ infras/           (shared infrastructure)
 ```
 
 ### Alternative name
-
 - domain -> entity (quite common option)
 - transport -> controllers (simplier)
 - business --> service (in which repository is simply a file given its succint content - mainly interface)
 
 ### References
-- https://go-proverbs.github.io/ (The interface should be slim.)
-- https://github.com/golang-standards/project-layout
+- https://go-proverbs.github.io/ (The interface should be slim. Well, basically the interface should be written where the consumers stand not the producers (source of data)). So we might have multiple interfaces if we - the consumers - use multiple sources of data (such as using more than one tables). But we actually know exactly what we want to use.
+- https://github.com/golang-standards/project-layout (This is golden standard but surely still optional. I strictly follow this layout but also attempt to make some changes when needed. For example, I prefer Makefile at the root so that I dont have to jump between folders when configurating the app in productions. So just my opinionated way.)
 - https://evrone.com/blog/go-clean-template
-- https://github.com/bernardinorafael/go-boilerplate (This template also implments DDD but everthing in one domain is separeted by files, not by folders/packages. What if the service becomes larger? I find that created separating packages/folders will help. I learn this from https://www.ardanlabs.com/blog/2017/02/package-oriented-design.html or https://archive.is/ECM0Z).
+- https://github.com/bernardinorafael/go-boilerplate (This template also implements DDD but everthing in one domain is separeted by files, not by folders/packages. What if the service becomes larger? I find that creating separated packages/folders will help. I learn this from https://www.ardanlabs.com/blog/2017/02/package-oriented-design.html or https://archive.is/ECM0Z something called "Package Oriented Design"). Yet, I also find some usefuls (and common) packages in pkg such as sending email with html template or how to prepare the data with pagination or caching with Redis at https://github.com/bernardinorafael/go-boilerplate/blob/main/pkg/
 - https://github.com/qiangxue/go-rest-api
 - https://github.com/bxcodec/go-clean-arch
+
 - https://philipptanlak.com/web-frontends-in-go/ or https://archive.is/ZiPT6 (I adopt a strategy to structe template layout in Laravel way from this blog. Kudo Philipp.)
 - https://www.damianopetrungaro.com/posts/ddd-using-golang-tactical-design/ or https://archive.is/1xKhb (the snapshot created by myself) (I learn about domain and validation of the entity, how to initialize a new struct (domain/entity) via New pattern to trigger internal/"build-in" validation)
 
