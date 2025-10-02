@@ -2,13 +2,13 @@
 
 ALERT: WIP
 
-I wanted to create a ready-to-use, scalable Golang template for building web applications with HTMX and server-side rendering (SSR). While there are a few templates out there, I still feel there isn’t an ideal candidate that really embraces SSR—especially when it comes to structuring HTML and static files using Go’s embed feature.
+I wanted to create a ready-to-use, scalable Golang template for building web applications with HTMX and server-side rendering (SSR). While there are a few templates out there, I still feel there isn’t an ideal candidate that truly embraces SSR—especially when it comes to structuring HTML and static files using Go’s embed feature.
 
 This template, GoSSR, is built from my personal experience developing several Golang projects. It implements Clean Architecture (modular approach) and Domain-Driven Design (DDD) Lite principles, with full support for server-side rendering.
 
 Please check out the references and my notes on discussions and lessons learned while creating the GoSSR template. I’ve kept the Standard Go Project Layout in mind but also made some modifications where I found improvements necessary.
 
-In GoSSR, you’ll notice I use a “consumer interface” approach (which you might somehow find it is not a convention in other languages), along with SQLC for database interactions—which is one of my personal favorites and a core reason why the template is structured this way. It is not perfect but I think it works for me.
+In GoSSR, you’ll notice I use a “consumer interface” approach (which you might find unconventional in other languages), along with SQLC for database interactions—which is one of my personal favorites and a core reason why the template is structured this way. It’s not perfect, but I think it works for me.
 
 ### Features
 - Clean Architecture with Domain-Driven Design
@@ -118,13 +118,13 @@ infras/           (shared infrastructure)
 - business --> service (in which repository is simply a file given its succint content - mainly interface)
 
 ### References
-- https://go-proverbs.github.io/ (The interface should be slim. Well, basically the interface should be written where the consumers stand not the producers (source of data)). So we might have multiple interfaces if we - the consumers - use multiple sources of data (such as using more than one tables). But we actually know exactly what we want to use.
+- https://go-proverbs.github.io/ (The interface should be slim. Well, basically the interface should be written where the consumers stand, not the producers (source of data)). So we might have multiple interfaces if we - the consumers - use multiple sources of data (such as using more than one tables). But we actually know exactly what we want to use. So interface only plays the role of a bridge. And we also know that in Golang, interface is IMPLICITLY implemented. I sometimes re-read this article https://www.alexedwards.net/blog/interfaces-explained to "entertain" about the concept of interface in Golang.
 - https://github.com/golang-standards/project-layout (This is golden standard but surely still optional. I strictly follow this layout but also attempt to make some changes when needed. For example, I prefer Makefile at the root so that I dont have to jump between folders when configurating the app in productions. So just my opinionated way.)
 - https://evrone.com/blog/go-clean-template
 - https://github.com/bernardinorafael/go-boilerplate (This template also implements DDD but everthing in one domain is separeted by files, not by folders/packages. What if the service becomes larger? I find that creating separated packages/folders will help. I learn this from https://www.ardanlabs.com/blog/2017/02/package-oriented-design.html or https://archive.is/ECM0Z something called "Package Oriented Design"). Yet, I also find some usefuls (and common) packages in pkg such as sending email with html template or how to prepare the data with pagination or caching with Redis at https://github.com/bernardinorafael/go-boilerplate/blob/main/pkg/
 - https://github.com/qiangxue/go-rest-api
 - https://github.com/bxcodec/go-clean-arch
-
+- https://autostrada.dev. I honestly learned lots of things from Alex's book (Let's Go), that is the reason I mentioned his way of constructing Golang's based app here.
 - https://philipptanlak.com/web-frontends-in-go/ or https://archive.is/ZiPT6 (I adopt a strategy to structe template layout in Laravel way from this blog. Kudo Philipp.)
 - https://www.damianopetrungaro.com/posts/ddd-using-golang-tactical-design/ or https://archive.is/1xKhb (the snapshot created by myself) (I learn about domain and validation of the entity, how to initialize a new struct (domain/entity) via New pattern to trigger internal/"build-in" validation)
 
